@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  app:
+    image: 'devsuproyect:latest'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/bancodevsu?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrival=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JACKSON_SERIALIZATION_FAIL_ON_EMPTY_BEANS=false
+    ports:
+      - 8080:8080
+
+  db:
+    image: 'mysql:8'
+    container_name: db
+    environment:
+      - MYSQL_USER=gregom7
+      - MYSQL_PASSWORD=Anto4Grego7
